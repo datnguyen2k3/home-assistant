@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HomeAssistantApplication {
+public class Application {
 
   public static void main(String[] args) {
-    SpringApplication.run(HomeAssistantApplication.class, args);
+    SpringApplication.run(Application.class, args);
   }
 
 }
