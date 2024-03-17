@@ -1,0 +1,8 @@
+CREATE TABLE door_statuses (
+    id SERIAL PRIMARY KEY,
+    uuid UUID DEFAULT uuid_generate_v4(),
+    door_id INTEGER NOT NULL,
+    is_open BOOLEAN NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

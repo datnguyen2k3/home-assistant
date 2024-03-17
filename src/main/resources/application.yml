@@ -16,7 +16,7 @@ spring:
   datasource:
     host: localhost
     port: 5432
-    dbname: magic-post
+    dbname: home-assistant
     url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.dbname}
     username: postgres
     password: postgres
@@ -39,7 +39,7 @@ spring:
           batch_size: 400
           lob:
             non_contextual_creation: true
-        default_schema: magic-post
+        default_schema: home-assistant
         show_sql: true
         format_sql: true
 
