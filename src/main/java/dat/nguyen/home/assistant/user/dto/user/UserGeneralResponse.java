@@ -1,4 +1,4 @@
-package dat.nguyen.home.assistant.common.exception.response;
+package dat.nguyen.home.assistant.user.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -13,6 +13,11 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ErrorResponse {
-  String error;
+public class UserGeneralResponse {
+  private Long id;
+  private String name;
+  private String username;
+  private String email;
+  private String createdAt;
+  private String updatedAt;
 }

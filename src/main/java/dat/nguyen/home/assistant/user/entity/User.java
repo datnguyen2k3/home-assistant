@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -23,9 +26,6 @@ public class User {
   @Column(name = "id")
   private Long id;
 
-  @Column(name = "uuid")
-  private UUID uuid;
-
   @Column(name = "name")
   private String name;
 
@@ -42,7 +42,7 @@ public class User {
   @Column(name = "created_at")
   private LocalDateTime createdAt;
 
-  @CreationTimestamp
+  @UpdateTimestamp
   @Column(name = "updated_at")
   private LocalDateTime updatedAt;
 }

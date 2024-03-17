@@ -1,6 +1,8 @@
-package dat.nguyen.home.assistant.common.exception.response;
+package dat.nguyen.home.assistant.user.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import dat.nguyen.home.assistant.user.dto.token.TokenResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +15,11 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ErrorResponse {
-  String error;
+public class UserCreateResponse {
+
+  @JsonProperty("user")
+  private UserGeneralResponse user;
+
+  @JsonProperty("token")
+  private TokenResponse token;
 }

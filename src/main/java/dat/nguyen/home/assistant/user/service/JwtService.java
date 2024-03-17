@@ -1,5 +1,6 @@
 package dat.nguyen.home.assistant.user.service;
 
+import dat.nguyen.home.assistant.user.dto.token.TokenResponse;
 import dat.nguyen.home.assistant.user.entity.UserAuthentication;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
@@ -24,6 +25,14 @@ public class JwtService {
   private String jwtSigningKey;
 
   public static int EXPIRED_TIME = 1000 * 60 * 24;
+
+  public TokenResponse createToken(UserAuthentication userAuthentication) {
+    String token = generateToken(userAuthentication);
+    return TokenResponse.builder()
+        .token(token)
+        .expiredAt(new Date(System.currentTimeMillis() + EXPIRED_TIME))
+        .build();
+  }
 
   public Long extractUserID(String token) {
     return Long.getLong(extractClaim(token, Claims::getSubject));
