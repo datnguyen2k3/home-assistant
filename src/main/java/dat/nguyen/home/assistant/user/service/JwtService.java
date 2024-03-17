@@ -25,8 +25,8 @@ public class JwtService {
 
   public static int EXPIRED_TIME = 1000 * 60 * 24;
 
-  public UUID extractUserID(String token) {
-    return UUID.fromString(extractClaim(token, Claims::getSubject));
+  public Long extractUserID(String token) {
+    return Long.getLong(extractClaim(token, Claims::getSubject));
   }
 
   public String generateToken(UserAuthentication userAuthentication) {
