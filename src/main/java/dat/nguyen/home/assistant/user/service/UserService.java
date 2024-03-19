@@ -22,7 +22,7 @@ public class UserService {
   private final UserCreateMapper userCreateMapper;
   private final UserGeneralMapper userGeneralMapper;
   private final PasswordEncoder passwordEncoder;
-  private final JwtService jwtService;
+  private final TokenService tokenService;
 
   @Transactional
   public UserCreateResponse createUser(UserCreateRequest request) {
@@ -31,7 +31,7 @@ public class UserService {
 
     user = userRepository.saveAndFlush(user);
     UserGeneralResponse userGeneralResponse = userGeneralMapper.toDto(user);
-    TokenResponse tokenResponse = jwtService.createToken(new UserAuthentication(user));
+    TokenResponse tokenResponse = tokenService.createToken(new UserAuthentication(user));
 
     return UserCreateResponse.builder()
         .user(userGeneralResponse)

@@ -4,7 +4,8 @@ import dat.nguyen.home.assistant.user.dto.token.TokenCreateRequest;
 import dat.nguyen.home.assistant.user.dto.token.TokenResponse;
 import dat.nguyen.home.assistant.user.dto.user.UserCreateRequest;
 import dat.nguyen.home.assistant.user.dto.user.UserCreateResponse;
-import dat.nguyen.home.assistant.user.dto.user.UserGeneralResponse;
+import dat.nguyen.home.assistant.user.service.JwtService;
+import dat.nguyen.home.assistant.user.service.TokenService;
 import dat.nguyen.home.assistant.user.service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -17,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
-
 @Validated
 @RestController
 @RequiredArgsConstructor
@@ -27,18 +26,15 @@ import java.util.Date;
 public class UserController {
 
   private final UserService userService;
+  private final TokenService tokenService;
 
   @PostMapping("/token")
   public ResponseEntity<TokenResponse> createToken(@RequestBody @Valid TokenCreateRequest request) {
-    return ResponseEntity.ok(TokenResponse.builder()
-        .token("token")
-        .expiredAt(new Date())
-        .build());
+    return new ResponseEntity<>(tokenService.createToken(request), HttpStatus.OK);
   }
 
   @PostMapping("")
   public ResponseEntity<UserCreateResponse> createUser(@RequestBody @Valid UserCreateRequest request) {
     return new ResponseEntity<>(userService.createUser(request), HttpStatus.CREATED);
   }
-
 }

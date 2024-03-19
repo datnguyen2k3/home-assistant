@@ -1,38 +1,38 @@
 package dat.nguyen.home.assistant.user.service;
 
+import dat.nguyen.home.assistant.user.dto.token.TokenCreateRequest;
 import dat.nguyen.home.assistant.user.dto.token.TokenResponse;
 import dat.nguyen.home.assistant.user.entity.UserAuthentication;
+import dat.nguyen.home.assistant.user.exception.type.UserNotFoundException;
+import dat.nguyen.home.assistant.user.repository.UserRepository;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.function.Function;
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
+
+  private final UserRepository userRepository;
 
   @Value("${token.signing.key}")
   private String jwtSigningKey;
 
   public static int EXPIRED_TIME = 1000 * 60 * 24;
 
-  public TokenResponse createToken(UserAuthentication userAuthentication) {
-    String token = generateToken(userAuthentication);
-    return TokenResponse.builder()
-        .token(token)
-        .expiredAt(new Date(System.currentTimeMillis() + EXPIRED_TIME))
-        .build();
-  }
 
   public Long extractUserID(String token) {
     return Long.getLong(extractClaim(token, Claims::getSubject));
